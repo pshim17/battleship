@@ -30,23 +30,24 @@ class Cell
    @fire_upon
   end
 
-def render(show_ship = false)
-  if @fired_upon == false
+  def render(show_ship = false)
+    if @fired_upon == false
       if @ship && @show_ship == true
           return "S"
-        else
+      else
           return "."
-        end
-      elsif @fire_upon
-        if @ship != nil
-          if @ship.sunk?
-            return "X"
-          else 
-            return "H"
-          end
+      end
+    elsif @fire_upon
+      if @ship != nil
+        if @ship.sunk?
+          return "X"
         else 
-          return "M"
+          return "H"
         end
+      else 
+        return "M"
       end
     end
+  end
 end
+  
