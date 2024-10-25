@@ -27,4 +27,14 @@ RSpec.describe Ship do
       expect(@cell.empty?).to be(false)
     end
   end
+
+  describe '#fire_upon' do
+    it "damages cell's ship if it has one" do
+        @cell.place_ship(@cruiser)
+        expect(@cell.fired_upon?).to eq(false)
+        @cell.fire_upon
+        expect(@cell.ship.health).to eq(2)
+        expect(@cell.fired_upon?).to eq(true)
+    end
+  end
 end
