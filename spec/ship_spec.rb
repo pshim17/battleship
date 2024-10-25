@@ -8,6 +8,7 @@ RSpec.describe Ship do
 
   describe 'initialize' do
     it "exits with attributes" do
+      expect(@cruiser.name).to be_a(String)
       expect(@cruiser.name).to eq("Cruiser")
       expect(@cruiser.name).to be_a(String)
       expect(@cruiser.length).to eq(3)
