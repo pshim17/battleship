@@ -1,7 +1,4 @@
-require 'rspec'
-require './lib/ship'
-require './lib/cell'
-require './lib/board'
+require 'spec_helper'
 
 RSpec.describe Board do
   before(:each) do
@@ -17,5 +14,6 @@ RSpec.describe Board do
     end
   end
 
+  describe ""
       
 end
