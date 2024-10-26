@@ -30,11 +30,11 @@ RSpec.describe Ship do
 
   describe '#fire_upon' do
     it "damages cell_1's ship if it has one" do
-        @cell_1.place_ship(@cruiser)
-        expect(@cell_1.fired_upon?).to eq(false)
-        @cell_1.fire_upon
-        expect(@cell_1.ship.health).to eq(2)
-        expect(@cell_1.fired_upon?).to eq(true)
+      @cell_1.place_ship(@cruiser)
+      expect(@cell_1.fired_upon?).to eq(false)
+      @cell_1.fire_upon
+      expect(@cell_1.ship.health).to eq(2)
+      expect(@cell_1.fired_upon?).to eq(true)
     end
   end
 
