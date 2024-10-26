@@ -11,30 +11,30 @@ RSpec.describe Ship do
 
   describe 'initialize' do
     it "exits with attributes" do
-      expect(@cell_1.coordinate).to be_a(String)
-      expect(@cell_1.coordinate).to eq("B4")
-      expect(@cell_1.ship).to be(nil)
-      expect(@cell_1.empty?).to be(true)
+        expect(@cell_1.coordinate).to be_a(String)
+        expect(@cell_1.coordinate).to eq("B4")
+        expect(@cell_1.ship).to be(nil)
+        expect(@cell_1.empty?).to be(true)
     end
   end
 
   describe '#place_ship' do
     it "places ship into the ship array" do
-      expect(@cell_1.ship).to be(nil)
-      expect(@cell_1.empty?).to be(true)
+        expect(@cell_1.ship).to be(nil)
+        expect(@cell_1.empty?).to be(true)
       @cell_1.place_ship(@cruiser)
-      expect(@cell_1.ship).to be(@cruiser)
-      expect(@cell_1.empty?).to be(false)
+        expect(@cell_1.ship).to be(@cruiser)
+        expect(@cell_1.empty?).to be(false)
     end
   end
 
   describe '#fire_upon' do
     it "damages cell_1's ship if it has one" do
         @cell_1.place_ship(@cruiser)
-        expect(@cell_1.fired_upon?).to eq(false)
+          expect(@cell_1.fired_upon?).to eq(false)
         @cell_1.fire_upon
-        expect(@cell_1.ship.health).to eq(2)
-        expect(@cell_1.fired_upon?).to eq(true)
+          expect(@cell_1.ship.health).to eq(2)
+          expect(@cell_1.fired_upon?).to eq(true)
     end
   end
 
@@ -42,7 +42,7 @@ RSpec.describe Ship do
     it 'tells result of fire upon based on the cell' do
       expect(@cell_1.render).to be_a(String)
       expect(@cell_1.render).to eq(".")
-      #expect(@cell_1.render(true)).to eq(nil)
+      expect(@cell_1.render(true)).to eq(nil)
       @cell_1.fire_upon
       expect(@cell_1.render).to eq("M")
       @cell_2.place_ship(@cruiser)
