@@ -14,6 +14,15 @@ RSpec.describe Board do
     end
   end
 
-  describe ""
+  describe "valid_coordinate?" do
+    it "tells if a cell is a valid coordinate" do
+      expect(@board.valid_coordinate?("A1")).to eq(true)
+      expect(@board.valid_coordinate?("D4")).to eq(true)
+      expect(@board.valid_coordinate?("A5")).to eq(false)
+      expect(@board.valid_coordinate?("E1")).to eq(false)
+      expect(@board.valid_coordinate?("A22")).to eq(false)
+
+    end
+  end
       
 end

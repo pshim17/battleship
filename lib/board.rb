@@ -16,4 +16,12 @@ class Board
       end
     end
   end
+
+  def valid_coordinate?(coordinate)
+    if @cells.keys.include?(coordinate)
+      true
+    else
+      false
+    end
+  end
 end
