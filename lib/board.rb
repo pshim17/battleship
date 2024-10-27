@@ -35,10 +35,22 @@ class Board
 
   #put helper methods under this line
   def consecutive?(keys)
-    num = keys.map(&:to_i)
-    (1...num.length).each do |k|
-      return false if num[k] != num[k - 1] + 1
+    numbers = keys.map { |key| key[1].to_i }
+    letters = keys.map { |key| key[0] }
+
+    if letters.uniq.length == 1
+      (1...numbers.length).each do |k|
+        return false if numbers[k] != numbers[k - 1] + 1
+      end
+      return true
     end
-    true
+
+    if numbers.uniq.length == 1
+      (1...letters.length).each do |k|
+        return false if letters[k] != letters[k - 1].next
+      end
+      return true
+    end
+    false
   end
 end
