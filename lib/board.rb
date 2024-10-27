@@ -66,4 +66,20 @@ class Board
       cell.place_ship(ship_name)
     end
   end
+
+  def render(show_ship = false)
+    if show_ship == false 
+      p "  1 2 3 4 \n" +
+        "A . . . . \n" +
+        "B . . . . \n" +
+        "C . . . . \n" +
+        "D . . . . \n"
+    elsif show_ship == true
+      p "  1 2 3 4 \n" +
+        "A S S S . \n" +
+        "B . . . . \n" +
+        "C . . . . \n" +
+        "D . . . . \n"
+    end
+  end
 end
