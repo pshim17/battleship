@@ -29,8 +29,14 @@ class Board
   def valid_placement?(ship, coordinates)
     return false unless coordinates.length == ship.length 
     return false unless coordinates.all? { |coordinate| valid_coordinate?(coordinate)}
+    
+    coordinates.each do |coordinate|
+      if @cells[coordinate].ship != nil
+        return false
+      end
+    end
+    
     consecutive?(coordinates)
-
   end
 
   #put helper methods under this line
