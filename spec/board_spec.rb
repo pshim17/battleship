@@ -30,6 +30,12 @@ RSpec.describe Board do
     it "tells if you can place a ship on valid coordinate" do
       expect(@board.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
       expect(@board.valid_placement?(@submarine, ["A2", "A3", "A4"])).to eq(false)
+      expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to eq(false)
+      expect(@board.valid_placement?(@submarine, ["A1", "C1"])).to eq(false)
+      expect(@board.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq(false)
+      expect(@board.valid_placement?(@submarine, ["C1", "B1"])).to eq(false)
+
+     
     end
   end
       
