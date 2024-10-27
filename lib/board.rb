@@ -1,4 +1,4 @@
-require 'spec_helper'
+require './lib/cell'
 
 class Board
   attr_reader :cells
@@ -12,7 +12,7 @@ class Board
     ("A".."D").each do |letter|
       (1..4).each do |number|
         key = "#{letter}#{number}"
-        @cells[key] = Cell.new(key)
+        @cells[key] = Cell.new(key) 
         @cells.sort
       end
     end
@@ -52,5 +52,12 @@ class Board
       return true
     end
     false
+  end
+
+  def place(ship_name, coordinates)
+    coordinates.each do |coordinate|
+      cell = @cells[coordinate]
+      cell.place_ship(ship_name)
+    end
   end
 end
