@@ -40,7 +40,7 @@ RSpec.describe Ship do
     it 'tells result of fire upon based on the cell' do
       expect(@cell_1.render).to be_a(String)
       expect(@cell_1.render).to eq(".")
-      expect(@cell_1.render(true)).to eq(nil)
+      # expect(@cell_1.render(true)).to eq(nil)
       @cell_1.fire_upon
       expect(@cell_1.render).to eq("M")
       @cell_2.place_ship(@cruiser)

@@ -67,23 +67,21 @@ class Board
   end
 
   def render(show_ship = false)
-    if show_ship == false 
-      board_top_row = "  1 2 3 4 \n"
-      board_rows = []
+    board_top_row = "  1 2 3 4 \n"
+    board_rows = []
 
-      ("A".."D").each do |letter|
-        row_header = "#{letter} "
-        row = ""
-        (1..4).each do |number|
-          row_number = "#{letter}#{number}"
-          cell = @cells[row_number]
-          row += "#{cell.render(show_ship)} "
-        end
-        new_row = row_header + row
-        board_rows << new_row
+    ("A".."D").each do |letter|
+      row_header = "#{letter} "
+      row = ""
+      (1..4).each do |number|
+        row_number = "#{letter}#{number}"
+        cell = @cells[row_number]
+        row += "#{cell.render(show_ship)} "
       end
-      new_board = board_rows.join("\n")
-      return board_top_row + new_board + "\n"
+      new_row = row_header + row.rstrip
+      board_rows << new_row
     end
+    new_board = board_rows.join("\n")
+    return board_top_row + new_board + "\n"
   end
 end

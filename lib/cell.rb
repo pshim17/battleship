@@ -37,8 +37,6 @@ class Cell
       return "H"
     elsif show_ship == true && empty? == false 
       return "S"
-    elsif show_ship == true && empty? == true
-      return nil 
     else
       return "."
     end
