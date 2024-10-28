@@ -35,7 +35,6 @@ class Board
         return false
       end
     end
-    
     consecutive?(coordinates)
   end
 
@@ -69,17 +68,22 @@ class Board
 
   def render(show_ship = false)
     if show_ship == false 
-      p "  1 2 3 4 \n" +
-        "A . . . . \n" +
-        "B . . . . \n" +
-        "C . . . . \n" +
-        "D . . . . \n"
-    elsif show_ship == true
-      p "  1 2 3 4 \n" +
-        "A S S S . \n" +
-        "B . . . . \n" +
-        "C . . . . \n" +
-        "D . . . . \n"
+      board_top_row = "  1 2 3 4 \n"
+      board_rows = []
+
+      ("A".."D").each do |letter|
+        row_header = "#{letter} "
+        row = ""
+        (1..4).each do |number|
+          row_number = "#{letter}#{number}"
+          cell = @cells[row_number]
+          row += "#{cell.render(show_ship)} "
+        end
+        new_row = row_header + row
+        board_rows << new_row
+      end
+      new_board = board_rows.join("\n")
+      return board_top_row + new_board + "\n"
     end
   end
 end
