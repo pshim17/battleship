@@ -1,3 +1,5 @@
+require './spec/spec_helper'
+
 class Cell 
   attr_reader :coordinate, :ship
 
@@ -7,8 +9,8 @@ class Cell
     @fire_upon = false
   end
 
-  def place_ship(name)
-    @ship = name
+  def place_ship(ship)
+    @ship = ship
   end
 
   def empty?
@@ -29,11 +31,11 @@ class Cell
   end 
 
   def render(show_ship = false)
-    if fired_upon? == true && @ship != nil && @ship.health == 0
+    if fired_upon? && @ship && @ship.health == 0
       return "X"
-    elsif fired_upon? == true && empty? == true
+    elsif fired_upon? && empty? == true
       return "M"
-    elsif fired_upon? == true && empty? == false 
+    elsif fired_upon? == true && empty? 
       return "H"
     elsif show_ship == true && empty? == false 
       return "S"
