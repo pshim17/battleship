@@ -1,4 +1,4 @@
-require './lib/cell'
+require './spec/spec_helper'
 
 class Board
   attr_reader :cells
@@ -59,10 +59,10 @@ class Board
     false
   end
 
-  def place(ship_name, coordinates)
+  def place(ship, coordinates)
     coordinates.each do |coordinate|
       cell = @cells[coordinate]
-      cell.place_ship(ship_name)
+      cell.place_ship(ship)
     end
   end
 
@@ -81,7 +81,7 @@ class Board
       new_row = row_header + row.rstrip
       board_rows << new_row
     end
-    new_board = board_rows.join("\n")
+     new_board = board_rows.join("\n")
     return board_top_row + new_board + "\n"
   end
 end
