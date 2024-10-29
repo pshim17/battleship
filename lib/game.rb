@@ -6,7 +6,8 @@ class Game
                 :player_cruiser, 
                 :player_submarine, 
                 :computer_cruiser, 
-                :computer_submarine
+                :computer_submarine,
+                :current_player
 
     def initialize
         @player_board = Board.new
@@ -15,6 +16,7 @@ class Game
         @player_submarine = Ship.new("Submarine", 2)
         @computer_cruiser = Ship.new("Cruiser", 3)
         @computer_submarine = Ship.new("Submarine", 2)
+        @current_player = :player
     end
 
     def start
@@ -39,8 +41,12 @@ class Game
     end
 
     def play_game
-        #place_cpu_ship
+        place_cpu_ship
         player_ship_placement
+        loop do
+            turn
+            break if game_over?
+        end
     end
 
     def place_cpu_ship
@@ -83,5 +89,9 @@ class Game
                 puts "Those are invalid coordinates. Please try again:"
             end
         end
+    end
+
+    def Turn
+        p_board = @current_player == 
     end
 end
