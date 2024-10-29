@@ -100,7 +100,7 @@ class Game
         loop do
             puts  "Enter the squares for the Cruiser (3 spaces):"
             puts ">"
-            cruiser_input = gets.chomp.split
+            cruiser_input = gets.chomp.split.map(&:upcase)
             if @player_board.valid_placement?(@player_cruiser, cruiser_input)
                 @player_board.place(@player_cruiser, cruiser_input)
                 puts @player_board.render(true)
@@ -112,7 +112,7 @@ class Game
         loop do
             puts "Enter the squares for the Submarine (2 spaces):"
             puts ">"
-            submarine_input = gets.chomp.split
+            submarine_input = gets.chomp.split.map(&:upcase)
             if @player_board.valid_placement?(@player_submarine, submarine_input)
                 @player_board.place(@player_submarine, submarine_input)
                 @player_board.render
@@ -123,14 +123,39 @@ class Game
             end
         end
     end
-
-    def Turn
+    def turn
+        puts "==========COMPUTER BOARD=========="
+        puts @computer_board.render
+        puts "==========PLAYER BOARD=========="
+        puts @player_board.render(true)
         coordinate = get_coordinate
 
-        if valid_coordinate?(coordinate)
-            process_turn(coordiante)
+        if @computer_board.valid_coordinate?(coordinate) == true
+            process_turn(coordinate)
         else
-            puts "Please enter a valid coordiante"
+            puts "Please enter a valid coordinate"
+            turn
         end
+    end
+
+    def get_coordinate
+        puts "Enter the coordinate for your shot:"
+        gets.chomp.upcase
+    end
+
+    def process_turn(coordinate)
+        cell = @computer_board.cells[coordinate]
+
+        if cell.fired_upon? == true
+            puts "You've already fired at this coordinate"
+        else
+            cell.fire_upon
+            @computer_board.render
+            switch_player
+        end
+    end
+    
+    def switch_player
+        @current_player = (@current_player == :player) ? :computer : :player
     end
 end
