@@ -47,6 +47,8 @@ class Game
             turn
             break if game_over?
         end
+        puts " "
+        load './lib/battleship_runner.rb'
     end
 
     def place_cpu_ship
@@ -109,6 +111,7 @@ class Game
                 puts "Those are invalid coordinates. Please try again:"
             end
         end
+
         loop do
             puts "Enter the squares for the Submarine (2 spaces):"
             puts ">"
@@ -123,6 +126,7 @@ class Game
             end
         end
     end
+
     def turn
         puts "==========COMPUTER BOARD=========="
         puts @computer_board.render
@@ -157,5 +161,17 @@ class Game
     
     def switch_player
         @current_player = (@current_player == :player) ? :computer : :player
+    end
+
+    def game_over?
+        if @player_cruiser.health == 0 || @player_submarine.health == 0
+            puts "You Win!"
+            return true
+        elsif @computer_cruiser.health == 0 || @computer_submarine.health == 0
+            puts "I Win!"
+            return true
+        else 
+            return false
+        end
     end
 end
