@@ -35,7 +35,7 @@ class Cell
       return "X"
     elsif fired_upon? && empty? == true
       return "M"
-    elsif fired_upon? == true && empty? 
+    elsif fired_upon? == true && empty? == false
       return "H"
     elsif show_ship == true && empty? == false 
       return "S"
