@@ -25,7 +25,8 @@ class Game
     def prompt_user
         puts "Enter p to play. Enter q to quit"
         user_input = gets.chomp
-
+        user_input
+        
         if user_input == 'p'
             play_game
         elsif user_input == 'q'
@@ -38,7 +39,8 @@ class Game
     end
 
     def play_game
-        place_cpu_ship
+        #place_cpu_ship
+        player_ship_placement
     end
 
     def place_cpu_ship
@@ -48,6 +50,38 @@ class Game
         submarine_coordinates = valid_coordinate?(@computer_submarine)
         @computer_board.place(@computer_submarine, submarine_coordinates)
 
-        binding.pry
+    end
+
+    def player_ship_placement
+        puts "I have laid out my ships on the grid."
+        puts "You now need to lay out your two ships"
+        puts "The Cruiser is three units long and the Submarine is two units long"
+        puts @player_board.render(true)
+
+        loop do
+            puts  "Enter the squares for the Cruiser (3 spaces):"
+            puts ">"
+            cruiser_input = gets.chomp.split
+            if @player_board.valid_placement?(@player_cruiser, cruiser_input)
+                @player_board.place(@player_cruiser, cruiser_input)
+                puts @player_board.render(true)
+                break
+            else
+                puts "Those are invalid coordinates. Please try again:"
+            end
+        end
+        loop do
+            puts "Enter the squares for the Submarine (2 spaces):"
+            puts ">"
+            submarine_input = gets.chomp.split
+            if @player_board.valid_placement?(@player_submarine, submarine_input)
+                @player_board.place(@player_submarine, submarine_input)
+                @player_board.render
+                puts @player_board.render(true)
+                break
+            else
+                puts "Those are invalid coordinates. Please try again:"
+            end
+        end
     end
 end
