@@ -123,7 +123,6 @@ class Game
             end
         end
     end
-
     def turn
         puts "==========COMPUTER BOARD=========="
         puts @computer_board.render
@@ -159,5 +158,4 @@ class Game
     def switch_player
         @current_player = (@current_player == :player) ? :computer : :player
     end
-    
 end
