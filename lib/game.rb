@@ -128,7 +128,7 @@ class Game
     end
 
     def turn
-        puts "==========COMPUTER BOARD=========="
+        puts "=========COMPUTER BOARD========="
         puts @computer_board.render
         puts "==========PLAYER BOARD=========="
         puts @player_board.render(true)
@@ -164,10 +164,12 @@ class Game
     end
 
     def game_over?
-        if @player_cruiser.health == 0 || @player_submarine.health == 0
+        if @player_cruiser.sunk? == true || @player_submarine.sunk? == true
+            puts " "
             puts "You Win!"
             return true
-        elsif @computer_cruiser.health == 0 || @computer_submarine.health == 0
+        elsif @computer_cruiser.sunk? == true || @computer_submarine.sunk? == true
+            puts " "
             puts "I Win!"
             return true
         else 
