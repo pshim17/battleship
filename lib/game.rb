@@ -148,19 +148,22 @@ class Game
     end
 
     def turn
-        puts " "
-        puts "=========COMPUTER BOARD========="
-        puts @computer_board.render
-        puts "==========PLAYER BOARD=========="
-        puts @player_board.render(true)
-        coordinate = get_coordinate
-
-        if @computer_board.valid_coordinate?(coordinate) == true
-            process_turn(coordinate)
-        else
+        loop do
             puts " "
-            puts "Please enter a valid coordinate"
-            turn
+            puts "=========COMPUTER BOARD========="
+            puts @computer_board.render
+            puts "==========PLAYER BOARD=========="
+            puts @player_board.render(true)
+            coordinate = get_coordinate
+
+            if @computer_board.valid_coordinate?(coordinate) == true
+                process_turn(coordinate)
+                break
+            else
+                puts " "
+                puts "Please enter a valid coordinate"
+                turn
+            end
         end
     end
 
@@ -173,13 +176,37 @@ class Game
     def process_turn(coordinate)
         cell = @computer_board.cells[coordinate]
 
+
         if cell.fired_upon? == true
             puts " "
             puts "You've already fired at this coordinate"
         else
             cell.fire_upon
+            show_shot(coordinate)
+
+            puts "==========COMPUTER BOARD=========="
             @computer_board.render
+            puts "=========="
             switch_player
+        end
+    end
+
+    def show_shot(coordinate)
+        cell = @computer_board.cells[coordinate]
+
+        if @current_player == :player
+
+            if cell.ship && cell.fired_upon?
+                puts " "
+                puts "Your shot on #{coordinate} was a hit!"
+                if cell.ship.sunk?
+                    puts ""
+                    puts "You sank the #{cell.ship.name}"
+                end
+            elsif cell.fired_upon?
+               puts " " 
+                puts "Your shot on #{coordinate} was a miss"
+            end
         end
     end
     
