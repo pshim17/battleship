@@ -243,7 +243,7 @@ class Game
     end
 
     def game_over?
-        if @player_cruiser.sunk? == true || @player_submarine.sunk? == true
+        if @player_cruiser.sunk? == true && @player_submarine.sunk? == true
             puts " "
             puts "==========COMPUTER BOARD========"
             puts @computer_board.render
@@ -252,7 +252,7 @@ class Game
             puts " "
             puts "I Win!"
             return true
-        elsif @computer_cruiser.sunk? == true || @computer_submarine.sunk? == true
+        elsif @computer_cruiser.sunk? == true && @computer_submarine.sunk? == true
             puts " "
             puts "==========COMPUTER BOARD========"
             puts @computer_board.render
