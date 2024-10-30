@@ -149,21 +149,56 @@ class Game
 
     def turn
         loop do
-            puts " "
-            puts "=========COMPUTER BOARD========="
-            puts @computer_board.render
-            puts "==========PLAYER BOARD=========="
-            puts @player_board.render(true)
-            coordinate = get_coordinate
-
-            if @computer_board.valid_coordinate?(coordinate) == true
-                process_turn(coordinate)
-                break
-            else
+            if @current_player == :player
                 puts " "
-                puts "Please enter a valid coordinate"
-                turn
+                puts "=========COMPUTER BOARD========="
+                puts @computer_board.render
+                puts "==========PLAYER BOARD=========="
+                puts @player_board.render(true)
+                coordinate = get_coordinate
+
+                if @computer_board.valid_coordinate?(coordinate) == true
+                    process_turn(coordinate)
+                    break
+                else
+                    puts " "
+                    puts "Please enter a valid coordinate"
+                    turn
+                end
+            else 
+                computer_turn
+                break
             end
+        end
+    end
+
+    def computer_turn
+        loop do
+            letters = ["A", "B", "C", "D"]
+            numbers = [1, 2, 3, 4]
+            random_letter = letters.sample
+            random_number = numbers.sample
+            coordinate = "#{random_letter}#{random_number}"
+
+            if @player_board.valid_coordinate?(coordinate) && !@player_board.cells[coordinate].fired_upon?
+                process_computer_shot(coordinate)
+                break
+            end
+        end
+        switch_player
+    end
+
+    def process_computer_shot(coordinate)
+        cell = @player_board.cells[coordinate]
+        cell.fire_upon
+
+        if cell.ship && cell.fired_upon? == false
+            puts "My shot at #{coordinate} was a hit!"
+            if cell.ship.sunk? == true
+                puts "My shot sunk your #{cell.ship.name}!"
+            end
+        else
+            puts "My shot at #{coordinate} was a miss."
         end
     end
 
@@ -176,17 +211,13 @@ class Game
     def process_turn(coordinate)
         cell = @computer_board.cells[coordinate]
 
-
         if cell.fired_upon? == true
             puts " "
             puts "You've already fired at this coordinate"
         else
             cell.fire_upon
             show_shot(coordinate)
-
-            puts "==========COMPUTER BOARD=========="
             @computer_board.render
-            puts "=========="
             switch_player
         end
     end
@@ -194,19 +225,16 @@ class Game
     def show_shot(coordinate)
         cell = @computer_board.cells[coordinate]
 
-        if @current_player == :player
-
-            if cell.ship && cell.fired_upon?
-                puts " "
-                puts "Your shot on #{coordinate} was a hit!"
-                if cell.ship.sunk?
-                    puts ""
-                    puts "You sank the #{cell.ship.name}"
-                end
-            elsif cell.fired_upon?
-               puts " " 
-                puts "Your shot on #{coordinate} was a miss"
+        if cell.ship && cell.fired_upon?
+            puts " "
+            puts "Your shot on #{coordinate} was a hit!"
+            if cell.ship.sunk?
+                puts ""
+                puts "You sunk my #{cell.ship.name}"
             end
+        elsif cell.fired_upon?
+            puts " " 
+            puts "Your shot on #{coordinate} was a miss"
         end
     end
     
@@ -217,21 +245,21 @@ class Game
     def game_over?
         if @player_cruiser.sunk? == true || @player_submarine.sunk? == true
             puts " "
-            puts "==========PLAYER BOARD=========="
-            puts @computer_board.render
-            puts "==========PLAYER BOARD=========="
-            puts @player_board.render
-            puts " "
-            puts "You Win!"
-            return true
-        elsif @computer_cruiser.sunk? == true || @computer_submarine.sunk? == true
-            puts " "
-            puts "==========PLAYER BOARD=========="
+            puts "==========COMPUTER BOARD========"
             puts @computer_board.render
             puts "==========PLAYER BOARD=========="
             puts @player_board.render
             puts " "
             puts "I Win!"
+            return true
+        elsif @computer_cruiser.sunk? == true || @computer_submarine.sunk? == true
+            puts " "
+            puts "==========COMPUTER BOARD========"
+            puts @computer_board.render
+            puts "==========PLAYER BOARD=========="
+            puts @player_board.render
+            puts " "
+            puts "You Win!"
             return true
         else 
             return false
