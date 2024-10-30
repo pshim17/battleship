@@ -60,6 +60,7 @@ class Game
             break if game_over?
         end
         puts " "
+        #putting prompt_user does not reset the boards
         load './lib/battleship_runner.rb'
     end
 
@@ -213,12 +214,12 @@ class Game
         cell = @player_board.cells[coordinate]
         cell.fire_upon
 
-        if cell.ship && cell.fired_upon? == false
+        if cell.ship && cell.fired_upon?
             puts "My shot at #{coordinate} was a hit!"
             if cell.ship.sunk? == true
-                puts "My shot sunk your #{cell.ship.name}!"
+                puts "My shot sank your #{cell.ship.name}!"
             end
-        else
+        elsif cell.fired_upon?
             puts "My shot at #{coordinate} was a miss."
         end
     end
@@ -230,7 +231,7 @@ class Game
             puts " "
             puts "Your shot on #{coordinate} was a hit!"
             if cell.ship.sunk?
-                puts "You sunk my #{cell.ship.name}."
+                puts "You sank my #{cell.ship.name}."
             end
         elsif cell.fired_upon?
             puts " " 
@@ -260,6 +261,7 @@ class Game
             puts @player_board.render(true)
             puts " "
             puts "You Win!"
+            puts "=========================================================================="
             return true
         else 
             return false

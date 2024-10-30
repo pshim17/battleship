@@ -21,7 +21,7 @@ RSpec.describe Game do
     it "places computers ships at random on computer board" do
       @game.place_cpu_ship
    
-     submarine_on_board = @computer_board.cells.any? do |cell|
+      submarine_on_board = @computer_board.cells.any? do |cell|
         #binding.pry
         cell.last.ship == @computer_submarine
           
