@@ -42,7 +42,9 @@ class Game
         if user_input == 'p'
             play_game
         elsif user_input == 'q'
+            puts " "
             puts "Good bye!"
+            puts " "
             exit!
         else 
             puts "Invalid input! Please enter p to play or enter q to quit"
@@ -112,7 +114,6 @@ class Game
         puts @player_board.render(true)
 
         loop do
-            puts " "
             puts  "Enter the squares for the Cruiser (3 spaces):"
             puts ">"
             cruiser_input = gets.chomp.split.map(&:upcase)
@@ -122,7 +123,8 @@ class Game
                 puts @player_board.render(true)
                 break
             else
-                puts "Those are invalid coordinates. Please try again:"
+                puts " "
+                puts "Those are invalid coordinates. Please try again/."
             end
         end
 
@@ -139,6 +141,7 @@ class Game
                 puts @player_board.render(true)
                 break
             else
+                puts " "
                 puts "Those are invalid coordinates. Please try again:"
             end
         end
@@ -164,7 +167,7 @@ class Game
     def get_coordinate
         puts " "
         puts "Enter the coordinate for your shot:"
-        gets.chomp.upcase
+        gets.chomp.rstrip.upcase
     end
 
     def process_turn(coordinate)
@@ -187,9 +190,19 @@ class Game
     def game_over?
         if @player_cruiser.sunk? == true || @player_submarine.sunk? == true
             puts " "
+            puts "==========PLAYER BOARD=========="
+            puts @computer_board.render
+            puts "==========PLAYER BOARD=========="
+            puts @player_board.render
+            puts " "
             puts "You Win!"
             return true
         elsif @computer_cruiser.sunk? == true || @computer_submarine.sunk? == true
+            puts " "
+            puts "==========PLAYER BOARD=========="
+            puts @computer_board.render
+            puts "==========PLAYER BOARD=========="
+            puts @player_board.render
             puts " "
             puts "I Win!"
             return true
