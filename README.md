@@ -8,6 +8,6 @@
     # work on iteration 4, refactoring
 # 3. Describe the pairing techniques you used while working on this project.
     # we used driver/navigator in the beginning of the project and used Ping Pong method: Jackson wrote tests and I wrote the method to pass those tests.
-4. Describe how feedback was shared over the course of this project.
+# 4. Describe how feedback was shared over the course of this project.
     # we mostly shared feedback during our pair programming sessions as we were writing the code together.
     # each of us created branches, pull requests to review each other's code.
