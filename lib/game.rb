@@ -114,6 +114,7 @@ class Game
         puts @player_board.render(true)
 
         loop do
+            puts " "
             puts  "Enter the squares for the Cruiser (3 spaces):"
             puts ">"
             cruiser_input = gets.chomp.split.map(&:upcase)
@@ -165,7 +166,7 @@ class Game
                     puts "Please enter a valid coordinate"
                     turn
                 end
-            else 
+            elsif @current_player == :computer
                 computer_turn
                 break
             end
@@ -181,25 +182,11 @@ class Game
             coordinate = "#{random_letter}#{random_number}"
 
             if @player_board.valid_coordinate?(coordinate) && !@player_board.cells[coordinate].fired_upon?
-                process_computer_shot(coordinate)
+                computer_show_shot(coordinate)
                 break
             end
         end
         switch_player
-    end
-
-    def process_computer_shot(coordinate)
-        cell = @player_board.cells[coordinate]
-        cell.fire_upon
-
-        if cell.ship && cell.fired_upon? == false
-            puts "My shot at #{coordinate} was a hit!"
-            if cell.ship.sunk? == true
-                puts "My shot sunk your #{cell.ship.name}!"
-            end
-        else
-            puts "My shot at #{coordinate} was a miss."
-        end
     end
 
     def get_coordinate
@@ -222,6 +209,20 @@ class Game
         end
     end
 
+    def computer_show_shot(coordinate)
+        cell = @player_board.cells[coordinate]
+        cell.fire_upon
+
+        if cell.ship && cell.fired_upon? == false
+            puts "My shot at #{coordinate} was a hit!"
+            if cell.ship.sunk? == true
+                puts "My shot sunk your #{cell.ship.name}!"
+            end
+        else
+            puts "My shot at #{coordinate} was a miss."
+        end
+    end
+
     def show_shot(coordinate)
         cell = @computer_board.cells[coordinate]
 
@@ -230,11 +231,11 @@ class Game
             puts "Your shot on #{coordinate} was a hit!"
             if cell.ship.sunk?
                 puts ""
-                puts "You sunk my #{cell.ship.name}"
+                puts "You sunk my #{cell.ship.name}."
             end
         elsif cell.fired_upon?
             puts " " 
-            puts "Your shot on #{coordinate} was a miss"
+            puts "Your shot on #{coordinate} was a miss."
         end
     end
     
@@ -248,7 +249,7 @@ class Game
             puts "==========COMPUTER BOARD========"
             puts @computer_board.render
             puts "==========PLAYER BOARD=========="
-            puts @player_board.render
+            puts @player_board.render(true)
             puts " "
             puts "I Win!"
             return true
@@ -257,7 +258,7 @@ class Game
             puts "==========COMPUTER BOARD========"
             puts @computer_board.render
             puts "==========PLAYER BOARD=========="
-            puts @player_board.render
+            puts @player_board.render(true)
             puts " "
             puts "You Win!"
             return true
