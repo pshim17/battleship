@@ -190,9 +190,19 @@ class Game
     def game_over?
         if @player_cruiser.sunk? == true || @player_submarine.sunk? == true
             puts " "
+            puts "==========PLAYER BOARD=========="
+            puts @computer_board.render
+            puts "==========PLAYER BOARD=========="
+            puts @player_board.render
+            puts " "
             puts "You Win!"
             return true
         elsif @computer_cruiser.sunk? == true || @computer_submarine.sunk? == true
+            puts " "
+            puts "==========PLAYER BOARD=========="
+            puts @computer_board.render
+            puts "==========PLAYER BOARD=========="
+            puts @player_board.render
             puts " "
             puts "I Win!"
             return true
