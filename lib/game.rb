@@ -125,7 +125,7 @@ class Game
                 break
             else
                 puts " "
-                puts "Those are invalid coordinates. Please try again/."
+                puts "Those are invalid coordinates. Please try again:."
             end
         end
 
@@ -230,7 +230,6 @@ class Game
             puts " "
             puts "Your shot on #{coordinate} was a hit!"
             if cell.ship.sunk?
-                puts ""
                 puts "You sunk my #{cell.ship.name}."
             end
         elsif cell.fired_upon?
