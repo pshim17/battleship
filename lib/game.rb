@@ -164,7 +164,7 @@ class Game
     def get_coordinate
         puts " "
         puts "Enter the coordinate for your shot:"
-        gets.chomp.upcase
+        gets.chomp.rstrip.upcase
     end
 
     def process_turn(coordinate)
