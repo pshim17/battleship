@@ -42,7 +42,9 @@ class Game
         if user_input == 'p'
             play_game
         elsif user_input == 'q'
+            puts " "
             puts "Good bye!"
+            puts " "
             exit!
         else 
             puts "Invalid input! Please enter p to play or enter q to quit"
@@ -112,7 +114,6 @@ class Game
         puts @player_board.render(true)
 
         loop do
-            puts " "
             puts  "Enter the squares for the Cruiser (3 spaces):"
             puts ">"
             cruiser_input = gets.chomp.split.map(&:upcase)
@@ -122,7 +123,8 @@ class Game
                 puts @player_board.render(true)
                 break
             else
-                puts "Those are invalid coordinates. Please try again:"
+                puts " "
+                puts "Those are invalid coordinates. Please try again/."
             end
         end
 
@@ -139,6 +141,7 @@ class Game
                 puts @player_board.render(true)
                 break
             else
+                puts " "
                 puts "Those are invalid coordinates. Please try again:"
             end
         end
